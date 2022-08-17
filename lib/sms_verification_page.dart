@@ -11,9 +11,9 @@ class SmsVerificationPage extends StatefulWidget {
 
 class _SmsVerificationPageState extends State<SmsVerificationPage>
     with SingleTickerProviderStateMixin {
+
   AnimationController? _animationController;
   int levelClock = 2 * 60;
-
   @override
   void initState() {
     super.initState();
@@ -26,7 +26,7 @@ class _SmsVerificationPageState extends State<SmsVerificationPage>
   }
 
   @override
-  void dispose() {
+  void dispose(){
     SmsAutoFill().unregisterListener();
     _animationController!.dispose();
     super.dispose();
@@ -67,7 +67,7 @@ class _SmsVerificationPageState extends State<SmsVerificationPage>
                     ),
                   ),
                   Text(
-                    "On number: +998993727053",
+                    "On number: +8801766609988",
                     style: TextStyle(fontWeight: FontWeight.w500),
                   )
                 ],
@@ -108,31 +108,33 @@ class _SmsVerificationPageState extends State<SmsVerificationPage>
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          SizedBox(
-            height: 56,
-            width: 200,
-            child: ElevatedButton(
-              onPressed: () async {
-                //?  use this code to get sms signature for your app
-                // final String signature = await SmsAutoFill().getAppSignature;
-                // print("Signature: $signature");
+          Expanded(
+            child: SizedBox(
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () async {
+                  //?  use this code to get sms signature for your app
+                  final String signature = await SmsAutoFill().getAppSignature;
+                  print("Signature: $signature");
 
-                _animationController!.reset();
-                _animationController!.forward();
-              },
-              child: const Text("Resend"),
+                  _animationController!.reset();
+                  _animationController!.forward();
+                },
+                child: const Text("Resend"),
+              ),
             ),
           ),
-          SizedBox(
-            height: 56,
-            width: 200,
-            child: ElevatedButton(
-              onPressed: () {
-                //Confirm and Navigate to Home Page
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
-              },
-              child: const Text("Confirm"),
+          Expanded(
+            child: SizedBox(
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  //Confirm and Navigate to Home Page
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                },
+                child: const Text("Confirm"),
+              ),
             ),
           ),
         ],
